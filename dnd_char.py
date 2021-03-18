@@ -1,22 +1,18 @@
 #!/usr/bin/python
 
-##imports
-import random
+# imports
+from random import random, randint
 import ran_gen
 import die
 
-##functions
+
+# functions
 def stat_gen():
-    "Roll 4d6, drop the lowest, return total sum"
+    """Roll 4d6, drop the lowest, return total sum"""
 
-    stat = 0
     rolls = [die.rolld(6), die.rolld(6), die.rolld(6), die.rolld(6)]
-    rolls.remove(min(rolls))
 
-    for i in range(3):
-        stat += rolls[i]
-
-    return stat
+    return sum(sorted(rolls, reverse=True)[:3])
 
 
 def get_alig(alig_list):
@@ -54,25 +50,25 @@ def get_wealth_desc(w):
     if w <= 100:
         txt = open("wealth_descs/s_poor.txt", "r")
 
-    if w > 100 and w <= 1250:
+    if 100 < w <= 1250:
         txt = open("wealth_descs/poor.txt", "r")
 
-    if w > 1250 and w <= 5800:
+    if 1250 < w <= 5800:
         txt = open("wealth_descs/moderate.txt", "r")
 
-    if w > 5800 and w <= 12500:
+    if 5800 < w <= 12500:
         txt = open("wealth_descs/wealthy.txt", "r")
 
-    if w >= 12500:
+    if w > 12500:
         txt = open("wealth_descs/s_wealthy.txt", "r")
 
     pot_descs = txt.read().split(",   ")
     txt.close()
 
-    return pot_descs[int(random.random() * (len(pot_descs) - 1))]
+    return pot_descs[int(random() * (len(pot_descs) - 1))]
 
 
-##body
+# body
 class character:
     def __init__(self):
         # character traits
@@ -118,7 +114,7 @@ class character:
 
                 if ster_class <= 48:
                     self.p_class = "Fighter"
-                elif ster_class > 48 and ster_class <= 96:
+                elif 48 < ster_class <= 96:
                     self.p_class = "Barbarian"
 
         elif self.p_race == "Elf":
@@ -128,13 +124,13 @@ class character:
 
                 if ster_class <= 32:
                     self.p_class = "Ranger"
-                elif ster_class > 32 and ster_class <= 48:
+                elif 32 < ster_class <= 48:
                     self.p_class = "Sorcerer"
-                elif ster_class > 48 and ster_class <= 68:
+                elif 48 < ster_class <= 68:
                     self.p_class = "Cleric"
-                elif ster_class > 68 and ster_class <= 80:
+                elif 68 < ster_class <= 80:
                     self.p_class = "Wizard"
-                elif ster_class > 80 and ster_class <= 96:
+                elif 80 < ster_class <= 96:
                     self.p_class = "Rogue"
 
         elif self.p_race == "Halfling":
@@ -144,11 +140,11 @@ class character:
 
                 if ster_class <= 25:
                     self.p_class = "Bard"
-                elif ster_class > 25 and ster_class <= 48:
+                elif 25 < ster_class <= 48:
                     self.p_class = "Rogue"
-                elif ster_class > 48 and ster_class <= 82:
+                elif 48 < ster_class <= 82:
                     self.p_class = "Cleric"
-                elif ster_class > 82 and ster_class <= 92:
+                elif 82 < ster_class <= 92:
                     self.p_class = "Monk"
 
         # elif self.p_race == "Human" :
@@ -160,29 +156,29 @@ class character:
                 self.p_alig_val[0] = 1
                 self.p_alig_val[1] = 1
 
-            elif ster_align > 30 and ster_align <= 60:
+            elif 30 < ster_align <= 60:
                 self.p_alig_val[0] = 3
                 self.p_alig_val[1] = 1
 
-            elif ster_align > 60 and ster_align <= 78:
+            elif 60 < ster_align <= 78:
                 self.p_alig_val[0] = 1
                 self.p_alig_val[1] = 3
 
-            elif ster_align > 78 and ster_align <= 96:
+            elif 78 < ster_align <= 96:
                 self.p_alig_val[0] = 3
                 self.p_alig_val[1] = 3
 
             if ster_class <= 22:
                 self.p_class = "Wizard"
-            elif ster_class > 22 and ster_class <= 32:
+            elif 22 < ster_class <= 32:
                 self.p_class = "Fighter"
-            elif ster_class > 32 and ster_class <= 48:
+            elif 32 < ster_class <= 48:
                 self.p_class = "Sorcerer"
-            elif ster_class > 48 and ster_class <= 58:
+            elif 48 < ster_class <= 58:
                 self.p_class = "Warlock"
-            elif ster_class > 58 and ster_class <= 72:
+            elif 58 < ster_class <= 72:
                 self.p_class = "Paladin"
-            elif ster_class > 72 and ster_class <= 88:
+            elif 72 < ster_class <= 88:
                 self.p_class = "Rogue"
 
         elif self.p_race == "Gnome":
@@ -190,22 +186,22 @@ class character:
                 self.p_alig_val[0] = 1
                 self.p_alig_val[1] = 1
 
-            elif ster_align > 90 and ster_align <= 98:
+            elif 90 < ster_align <= 98:
                 self.p_alig_val[0] = 3
                 self.p_alig_val[0] = 1
 
             if ster_align <= 95:
                 if ster_class <= 18:
                     self.p_class = "Wizard"
-                elif ster_class > 18 and ster_class <= 42:
+                elif 18 < ster_class <= 42:
                     self.p_class = "Bard"
-                elif ster_class > 42 and ster_class <= 48:
+                elif 42 < ster_class <= 48:
                     self.p_class = "Sorcerer"
-                elif ster_class > 48 and ster_class <= 58:
+                elif 48 < ster_class <= 58:
                     self.p_class = "Warlock"
-                elif ster_class > 58 and ster_class <= 76:
+                elif 58 < ster_class <= 76:
                     self.p_class = "Paladin"
-                elif ster_class > 76 and ster_class <= 88:
+                elif 76 < ster_class <= 88:
                     self.p_class = "Sorcerer"
 
         elif self.p_race == "Half-Elf":  # numbers might need adjusting
@@ -214,15 +210,15 @@ class character:
 
                 if ster_class <= 22:
                     self.p_class = "Wizard"
-                elif ster_class > 22 and ster_class <= 32:
+                elif 22 < ster_class <= 32:
                     self.p_class = "Fighter"
-                elif ster_class > 32 and ster_class <= 48:
+                elif 32 < ster_class <= 48:
                     self.p_class = "Sorcerer"
-                elif ster_class > 48 and ster_class <= 58:
+                elif 48 < ster_class <= 58:
                     self.p_class = "Warlock"
-                elif ster_class > 58 and ster_class <= 72:
+                elif 58 < ster_class <= 72:
                     self.p_class = "Paladin"
-                elif ster_class > 72 and ster_class <= 88:
+                elif 72 < ster_class <= 88:
                     self.p_class = "Rogue"
 
         elif self.p_race == "Half-Orc":  # numbers might need adjusting
@@ -232,11 +228,11 @@ class character:
 
                 if ster_class <= 40:
                     self.p_class = "Barbarian"
-                elif ster_class > 40 and ster_class <= 80:
+                elif 40 < ster_class <= 80:
                     self.p_class = "Fighter"
-                elif ster_class > 80 and ster_class <= 90:
+                elif 80 < ster_class <= 90:
                     self.p_class = "Monk"
-                elif ster_class > 90 and ster_class <= 100:
+                elif 90 < ster_class <= 100:
                     self.p_class = "Paladin"
 
         elif self.p_race == "Tiefling":  # numbers might need adjusting
@@ -246,15 +242,15 @@ class character:
 
                 if ster_class <= 22:
                     self.p_class = "Wizard"
-                elif ster_class > 22 and ster_class <= 32:
+                elif 22 < ster_class <= 32:
                     self.p_class = "Ranger"
-                elif ster_class > 32 and ster_class <= 48:
+                elif 32 < ster_class <= 48:
                     self.p_class = "Sorcerer"
-                elif ster_class > 48 and ster_class <= 58:
+                elif 48 < ster_class <= 58:
                     self.p_class = "Warlock"
-                elif ster_class > 58 and ster_class <= 72:
+                elif 58 < ster_class <= 72:
                     self.p_class = "Paladin"
-                elif ster_class > 72 and ster_class <= 88:
+                elif 72 < ster_class <= 88:
                     self.p_class = "Rogue"
 
     def smart_age(self):
@@ -291,7 +287,7 @@ class character:
 
         # i don't remember what tm stood for, but the intent is to help make
         # a character's age more random
-        tm = random.randrange(86, 99) / 100
+        tm = randint(86, 100) / 100
 
         # age
         a = 1
@@ -355,25 +351,33 @@ class character:
         This section has the most problems, probably
         """
 
-        th_s_poor = 100
-        th_poor = 1250 - th_s_poor
-        th_mod = 5800 - th_poor
-        th_wea = 12500 - th_mod
-        th_s_wea = 15000 - th_wea
+        wealth = {
+            'wretched': 10,
+            'squalor': 50,
+            'poor': 250,
+            'modest': 1000,
+            'comfortable': 4_000,
+            'wealthy': 12_500,
+            'aristocratic': 25_000,
+        }
+
         p = die.rolld(1000)
 
-        rand = random.random()
-
         if p <= 92:
-            self.p_net_worth = int(rand * 10)
-        elif p > 92 and p <= 500:
-            self.p_net_worth = int(rand * random.randrange(1, th_poor)) + 100
-        elif p > 500 and p <= 982:
-            self.p_net_worth = int(rand * random.randrange(1, th_mod)) + 1250
-        elif p > 982 and p <= 996:
-            self.p_net_worth = int(rand * random.randrange(1, th_wea)) + 5800
+            self.p_wea_desc = 'wretched'
+            self.p_net_worth = die.rolld(wealth['wretched'])
+        elif 92 < p <= 500:
+            self.p_wea_desc = 'poor'
+            self.p_net_worth = die.rolld(wealth['poor']) + wealth['squalor']
+        elif 500 < p <= 982:
+            self.p_wea_desc = 'modest'
+            self.p_net_worth = die.rolld(wealth['modest']) + wealth['poor']
+        elif 982 < p <= 996:
+            self.p_wea_desc = 'wealthy'
+            self.p_net_worth = die.rolld(wealth['wealthy']) + wealth['comfortable']
         elif p > 996:
-            self.p_net_worth = int(rand * random.randrange(1, th_s_wea)) + 9200
+            self.p_wea_desc = 'aristocratic'
+            self.p_net_worth = die.rolld(wealth['aristocratic']) + wealth['wealthy']
 
         # race factor
         if self.p_class == "Dwarf":
@@ -395,9 +399,6 @@ class character:
         elif self.p_class == "Tiefling":
             self.p_net_worth = int(self.p_net_worth * 1.03)
 
-        # wealth descriptions have been cut out of this version,
-        # might be added later
-        self.p_wea_desc = get_wealth_desc(self.p_net_worth)
 
     def smart_stats(self):
         "Optimizes stats based on class based on 5th edition PHB"
@@ -462,7 +463,7 @@ class character:
                 self.wis = ph[3]
                 self.cha = ph[4]
                 self.int = ph[5]
-            elif p > 46 and p <= 92:
+            elif 46 < p <= 92:
                 self.dex = ph[0]
                 self.con = ph[1]
                 self.wis = ph[2]
@@ -557,7 +558,7 @@ class character:
                 self.wis = ph[3]
                 self.str = ph[4]
                 self.cha = ph[5]
-            elif p > 50 and p <= 66:
+            elif 50 < p <= 66:
                 self.int = ph[0]
                 self.dex = ph[1]
                 self.con = ph[2]
